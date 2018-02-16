@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import {Col, Jumbotron, NavItem, Row} from 'react-bootstrap';
 
 import Container from './Container';
-import PageFooter from './PageFooter';
-import PageHeader from './PageHeader';
-import PageMenu from './PageMenu';
 
 import getIdFromTitle from '../util/getIdFromTitle';
 
@@ -36,7 +33,6 @@ class Page extends React.Component {
 
     return (
       <div className="bs-docs-page">
-        <PageHeader />
         <Jumbotron>
           <Container>
             <h1>{title}</h1>
@@ -47,14 +43,8 @@ class Page extends React.Component {
             <Col md={9}>
               {children}
             </Col>
-            <Col className="bs-docs-sidebar-holder" md={3}>
-              <PageMenu>
-                {this._sections.map(this._renderMenuItem)}
-              </PageMenu>
-            </Col>
           </Row>
         </Container>
-        <PageFooter />
       </div>
     );
   }

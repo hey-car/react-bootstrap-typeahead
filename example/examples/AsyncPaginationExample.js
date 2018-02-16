@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {AsyncTypeahead} from '../../src/';
-import GithubMenuItem from '../components/GithubMenuItem.react';
+import LocationMenuItem from '../components/LocationMenuItem.react';
 import makeAndHandleRequest from '../util/makeAndHandleRequest';
 
 const PER_PAGE = 50;
@@ -20,16 +20,17 @@ class AsyncPaginationExample extends React.Component {
     return (
       <AsyncTypeahead
         {...this.state}
-        labelKey="login"
+        filterBy={() => true}
+        labelKey={(location) => `${location.postcode} ${location.placeName}`}
         maxResults={PER_PAGE - 1}
         minLength={2}
         onInputChange={this._handleInputChange}
         onPaginate={this._handlePagination}
         onSearch={this._handleSearch}
         paginate
-        placeholder="Search for a Github user..."
+        placeholder="Search for a location..."
         renderMenuItemChildren={(option, props) => (
-          <GithubMenuItem key={option.id} user={option} />
+          <LocationMenuItem key={option.id} location={option} />
         )}
         useCache={false}
       />

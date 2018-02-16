@@ -3,17 +3,18 @@ import fetch from 'isomorphic-fetch';
 // Polyfill Promises for IE and older browsers.
 require('es6-promise').polyfill();
 
-const SEARCH_URI = 'https://api.github.com/search/users';
+const SEARCH_URI = 'http://localhost/location/search';
 
 export default function makeAndHandleRequest(query, page=1) {
-  return fetch(`${SEARCH_URI}?q=${query}+in:login&page=${page}&per_page=50`)
+  return fetch(`${SEARCH_URI}?q=${query}&page=${page}&size=50`)
     .then((resp) => resp.json())
-    .then(({items, total_count}) => {
-      const options = items.map((i) => ({
-        avatar_url: i.avatar_url,
-        id: i.id,
-        login: i.login,
+    .then(({content, totalElements}) => {
+      const options = content.map((i) => ({
+        adminName1: i.adminName1,
+        adminName2: i.adminName2,
+        placeName: i.placeName,
+        postcode: i.postcode,
       }));
-      return {options, total_count};
+      return {options, totalElements};
     });
 }

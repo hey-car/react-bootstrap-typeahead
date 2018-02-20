@@ -3,9 +3,9 @@ import fetch from 'isomorphic-fetch';
 // Polyfill Promises for IE and older browsers.
 require('es6-promise').polyfill();
 
-const SEARCH_URI = 'http://localhost/location/search';
+const SEARCH_URI = 'https://api.hey.car/location/search';
 
-export default function makeAndHandleRequest(query, page=1) {
+export default function makeAndHandleRequest(query, page=0) {
   return fetch(`${SEARCH_URI}?q=${query}&page=${page}&size=50`)
     .then((resp) => resp.json())
     .then(({content, totalElements}) => {

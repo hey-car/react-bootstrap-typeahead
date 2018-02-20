@@ -72,7 +72,7 @@ class AsyncPaginationExample extends React.Component {
     this.setState({isLoading: true});
     makeAndHandleRequest(query)
       .then((resp) => {
-        this._cache[query] = {...resp, page: 1};
+        this._cache[query] = {...resp, page: 0};
         this.setState({
           isLoading: false,
           options: resp.options,
